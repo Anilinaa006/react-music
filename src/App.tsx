@@ -1,9 +1,8 @@
+import { useRoutes } from 'react-router-dom'
+import routes from './router'
+
 function App() {
-  return (
-    <>
-      <div>这是app</div>
-    </>
-  )
+  return <div className="App">{useRoutes(routes)}</div>
 }
 
 export default App
