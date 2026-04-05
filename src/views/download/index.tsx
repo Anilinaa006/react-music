@@ -1,8 +1,13 @@
-const Download = () => {
-  return (
-    <div>
-      <div>这是download</div>
-    </div>
-  )
+import { memo } from 'react'
+import type { FC, ReactNode } from 'react'
+
+// 对类型进行约束
+export interface IProps {
+  children?: ReactNode
 }
-export default Download
+
+const Download: FC<IProps> = () => {
+  return <div>这是download</div>
+}
+
+export default memo(Download) 
