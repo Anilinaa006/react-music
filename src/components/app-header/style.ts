@@ -48,7 +48,7 @@ export const HeaderLeft = styled.div`
           content: '';
           width: 28px;
           height: 19px;
-           background-image: url(${spriteImg})
+          background-image: url(${spriteImg});
           background-position: -190px 0;
           top: 20px;
           right: -15px;
