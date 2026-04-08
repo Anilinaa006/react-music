@@ -9,7 +9,7 @@ export interface IProps {
 const AppFooter: FC<IProps> = () => {
   return (
     <div>
-      <h2>这是footer</h2>
+      <h2>我是footer</h2>
     </div>
   )
 }
