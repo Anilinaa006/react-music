@@ -5,6 +5,7 @@ import { shallowEqual } from 'react-redux'
 import { BannerControl, BannerLeft, BannerRight, BannerWrapper } from './style'
 import { Carousel } from 'antd'
 import type { CarouselRef } from 'antd/lib/carousel'
+import classNames from 'classnames'
 
 // 对类型进行约束
 export interface IProps {
@@ -35,6 +36,7 @@ const TopBanner: FC<IProps> = () => {
   function handleAfterChange(current: number) {
     setCurrentIndex(current)
   }
+
   //获取背景图片
   let bgImageUrl = banners[currentIndex]?.imageUrl
   if (bgImageUrl) {
@@ -53,6 +55,7 @@ const TopBanner: FC<IProps> = () => {
             ref={bannerRef}
             effect="fade"
             afterChange={handleAfterChange}
+            dots={false}
           >
             {banners.map((item) => {
               return (
@@ -66,6 +69,19 @@ const TopBanner: FC<IProps> = () => {
               )
             })}
           </Carousel>
+          <ul className="dots">
+            {banners.map((item, index) => {
+              return (
+                <li key={item.imageUrl}>
+                  <span
+                    className={classNames('item', {
+                      active: index === currentIndex
+                    })}
+                  ></span>
+                </li>
+              )
+            })}
+          </ul>
         </BannerLeft>
         <BannerRight></BannerRight>
         <BannerControl>
