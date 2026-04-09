@@ -2,6 +2,7 @@ import { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
 import { fetchBannerDataAction } from './store/recommend'
+import TopBanner from './c-cpns/top-bannner'
 
 // 对类型进行约束
 export interface IProps {
@@ -13,7 +14,12 @@ const Recommend: FC<IProps> = () => {
   useEffect(() => {
     dispatch(fetchBannerDataAction())
   }, [])
-  return <div>这是recommend</div>
+  return (
+    <div>
+      <TopBanner />
+      这是recommend
+    </div>
+  )
 }
 
 export default memo(Recommend)
