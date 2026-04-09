@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react'
+import { memo, useRef, useState } from 'react'
 import type { FC, ReactNode } from 'react'
 import { useAppSelector } from '@/store'
 import { shallowEqual } from 'react-redux'
@@ -12,6 +12,7 @@ export interface IProps {
 }
 
 const TopBanner: FC<IProps> = () => {
+  const [currentIndex, setCurrentIndex] = useState(0)
   // 从store中获取banner数据
   const { banners } = useAppSelector(
     (state) => ({
@@ -31,11 +32,28 @@ const TopBanner: FC<IProps> = () => {
   function handleNextClick() {
     bannerRef.current?.next()
   }
+  function handleAfterChange(current: number) {
+    setCurrentIndex(current)
+  }
+  //获取背景图片
+  let bgImageUrl = banners[currentIndex]?.imageUrl
+  if (bgImageUrl) {
+    bgImageUrl = bgImageUrl + '?imageView&blur=40x20'
+  }
   return (
-    <BannerWrapper>
+    <BannerWrapper
+      style={{
+        background: `url('${bgImageUrl}') center center / 6000px`
+      }}
+    >
       <div className="banner wrap-v2">
         <BannerLeft>
-          <Carousel autoplay ref={bannerRef}>
+          <Carousel
+            autoplay
+            ref={bannerRef}
+            effect="fade"
+            afterChange={handleAfterChange}
+          >
             {banners.map((item) => {
               return (
                 <div key={item.imageUrl} className="banner-item">

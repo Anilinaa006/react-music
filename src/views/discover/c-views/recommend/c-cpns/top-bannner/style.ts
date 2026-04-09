@@ -3,9 +3,6 @@ import bannerSprite from '@/assets/img/banner_sprite.png'
 import downloadImg from '@/assets/img/download.png'
 
 export const BannerWrapper = styled.div`
-  background: url('http://p1.music.126.net/J8qc2LWycyf8fr1EpZaw8w==/109951168569792042.jpg?imageView&blur=40x20')
-    center center / 6000px;
-
   .banner {
     height: 270px;
     display: flex;
