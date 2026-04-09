@@ -1,6 +1,7 @@
 import { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
-import axios from 'axios'
+import { useAppDispatch } from '@/store'
+import { fetchBannerDataAction } from './store/recommend'
 
 // 对类型进行约束
 export interface IProps {
@@ -8,17 +9,10 @@ export interface IProps {
 }
 
 const Recommend: FC<IProps> = () => {
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    axios
-      .get('http://localhost:3000/banner', {
-        params: { type: 0 },
-        withCredentials: true
-      })
-      .then((res) => {
-        console.log(res.data)
-      })
+    dispatch(fetchBannerDataAction())
   }, [])
-
   return <div>这是recommend</div>
 }
 
