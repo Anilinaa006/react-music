@@ -1,7 +1,10 @@
 import { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
-import { fetchBannerDataAction } from './store/recommend'
+import {
+  fetchBannerDataAction,
+  fetchHotRecommendAction
+} from './store/recommend'
 import TopBanner from './c-cpns/top-bannner'
 import {
   RecommendWrapper,
@@ -20,6 +23,7 @@ const Recommend: FC<IProps> = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchBannerDataAction())
+    dispatch(fetchHotRecommendAction())
   }, [])
   return (
     <RecommendWrapper>
@@ -27,7 +31,6 @@ const Recommend: FC<IProps> = () => {
       <RecommendSection className="wrap-v2">
         <RecommendLeft>
           <HotRecommend />
-          left
         </RecommendLeft>
         <RecommendRight>right</RecommendRight>
       </RecommendSection>
