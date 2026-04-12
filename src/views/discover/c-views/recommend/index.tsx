@@ -3,7 +3,13 @@ import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
 import { fetchBannerDataAction } from './store/recommend'
 import TopBanner from './c-cpns/top-bannner'
-import { RecommendWrapper, RecommendSection, RecommendLeft, RecommendRight } from './style'
+import {
+  RecommendWrapper,
+  RecommendSection,
+  RecommendLeft,
+  RecommendRight
+} from './style'
+import HotRecommend from './c-cpns/hot-recommend'
 
 // 对类型进行约束
 export interface IProps {
@@ -18,8 +24,11 @@ const Recommend: FC<IProps> = () => {
   return (
     <RecommendWrapper>
       <TopBanner />
-      <RecommendSection>
-        <RecommendLeft>left</RecommendLeft>
+      <RecommendSection className="wrap-v2">
+        <RecommendLeft>
+          <HotRecommend />
+          left
+        </RecommendLeft>
         <RecommendRight>right</RecommendRight>
       </RecommendSection>
     </RecommendWrapper>

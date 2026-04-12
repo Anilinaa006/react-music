@@ -4,7 +4,7 @@ import downloadImg from '@/assets/img/download.png'
 
 export const BannerWrapper = styled.div`
   .banner {
-    height: 270px;
+    height: 284px;
     display: flex;
     position: relative;
   }
@@ -16,9 +16,11 @@ export const BannerLeft = styled.div`
 
   .banner-item {
     overflow: hidden;
-    height: 270px;
+    height: 284px;
     .image {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -55,7 +57,7 @@ export const BannerRight = styled.a.attrs({
   target: '_blank'
 })`
   width: 254px;
-  height: 270px;
+  height: 284px;
   background: url(${downloadImg});
 `
 export const BannerControl = styled.div`
