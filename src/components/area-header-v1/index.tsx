@@ -1,19 +1,29 @@
 import { memo } from 'react'
 import type { FC, ReactNode } from 'react'
 import { HeaderV1Wrapper } from './style'
+import { Link } from 'react-router-dom'
 
 // 对类型进行约束
 export interface IProps {
   children?: ReactNode
+  title?: string
+  keywords?: string[]
+  moreText?: string
+  moreLink?: string
 }
 
-const AreaHeaderV1: FC<IProps> = () => {
-  const keywords = ['华语', '流行', '摇滚', '民谣', '电子']
+const AreaHeaderV1: FC<IProps> = (props) => {
+  const {
+    title = '热门推荐',
+    keywords = [],
+    moreText = '更多',
+    moreLink = '/'
+  } = props
   return (
     <div>
       <HeaderV1Wrapper className="sprite_02">
         <div className="left">
-          <div className="title">热门推荐</div>
+          <div className="title">{title}</div>
           <div className="keywords">
             {keywords.map((item) => (
               <div key={item} className="item">
@@ -24,9 +34,9 @@ const AreaHeaderV1: FC<IProps> = () => {
           </div>
         </div>
         <div className="right">
-          <a href="" className="more">
-            更多
-          </a>
+          <Link className="more" to={moreLink}>
+            {moreText}
+          </Link>
           <i className="icon sprite_02"></i>
         </div>
       </HeaderV1Wrapper>
