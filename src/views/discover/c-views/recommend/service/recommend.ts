@@ -24,3 +24,12 @@ export const getPlayListDetail = (id: number) => {
     }
   })
 }
+
+// 歌手
+export const getArtistList = (limit = 30) => {
+  return api.get('/artist/list', {
+    params: {
+      limit
+    }
+  })
+}

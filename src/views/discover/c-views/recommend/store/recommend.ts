@@ -3,7 +3,8 @@ import {
   getBanners,
   getHotRecommend,
   getNewAlbum,
-  getPlayListDetail
+  getPlayListDetail,
+  getArtistList
 } from '../service/recommend'
 
 // 异步action获取banner数据
@@ -53,11 +54,22 @@ export const fetchPlayListDetailAction = createAsyncThunk(
       // }
     }
     Promise.all(promises).then((res) => {
-      const playLists= res.map((item) => item.playlist)
+      const playLists = res.map((item) => item.playlist)
       dispatch(changeRankingsAction(playLists))
     })
   }
 )
+
+// 异步action获取歌手数据
+export const fetchArtistListAction = createAsyncThunk(
+  'artistList',
+  async (_, { dispatch }) => {
+    const res = await getArtistList(5)
+    console.log(res)
+    dispatch(changeArtistListAction((res as any).artists))
+  }
+)
+
 interface IRecommendState {
   banners: any[]
   hotRecommend: any[]
@@ -66,13 +78,15 @@ interface IRecommendState {
   // upRanking: any
   // newRanking: any
   // originalRanking: any
+  artistList: any[]
 }
 
 const initialState: IRecommendState = {
   banners: [],
   hotRecommend: [],
   newAlbum: [],
-  rankings: []
+  rankings: [],
+  artistList: []
   // upRanking: {},
   // newRanking: {},
   // originalRanking: {}
@@ -93,6 +107,9 @@ const recommendSlice = createSlice({
     },
     changeRankingsAction(state, { payload }) {
       state.rankings = payload
+    },
+    changeArtistListAction(state, { payload }) {
+      state.artistList = payload
     }
   }
 })
@@ -102,5 +119,6 @@ export const {
   changeBannersAction,
   changeHotRecommendAction,
   changeNewAlbumAction,
-  changeRankingsAction
+  changeRankingsAction,
+  changeArtistListAction
 } = recommendSlice.actions

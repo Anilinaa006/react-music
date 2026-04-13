@@ -5,7 +5,8 @@ import {
   fetchBannerDataAction,
   fetchHotRecommendAction,
   fetchNewAlbumAction,
-  fetchPlayListDetailAction
+  fetchPlayListDetailAction,
+  fetchArtistListAction
 } from './store/recommend'
 import TopBanner from './c-cpns/top-bannner'
 import {
@@ -18,6 +19,8 @@ import HotRecommend from './c-cpns/hot-recommend'
 import NewAlbum from './c-cpns/new-album'
 import TopRanking from './c-cpns/top-ranking'
 import UserLogin from './c-cpns/user-login'
+import SettleSinger from './c-cpns/settle-singer'
+import HotAnchor from './c-cpns/hot-anchor'
 
 // 对类型进行约束
 export interface IProps {
@@ -31,6 +34,7 @@ const Recommend: FC<IProps> = () => {
     dispatch(fetchHotRecommendAction())
     dispatch(fetchNewAlbumAction())
     dispatch(fetchPlayListDetailAction())
+    dispatch(fetchArtistListAction())
   }, [])
   return (
     <RecommendWrapper>
@@ -43,8 +47,8 @@ const Recommend: FC<IProps> = () => {
         </RecommendLeft>
         <RecommendRight>
           <UserLogin />
-          <div>入驻歌手</div>
-          <div>热门主播</div>
+          <SettleSinger />
+          <HotAnchor />
         </RecommendRight>
       </RecommendSection>
     </RecommendWrapper>
