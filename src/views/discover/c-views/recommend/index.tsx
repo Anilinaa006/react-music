@@ -3,7 +3,8 @@ import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
 import {
   fetchBannerDataAction,
-  fetchHotRecommendAction
+  fetchHotRecommendAction,
+  fetchNewAlbumAction
 } from './store/recommend'
 import TopBanner from './c-cpns/top-bannner'
 import {
@@ -13,6 +14,7 @@ import {
   RecommendRight
 } from './style'
 import HotRecommend from './c-cpns/hot-recommend'
+import NewAlbum from './c-cpns/new-album'
 
 // 对类型进行约束
 export interface IProps {
@@ -24,6 +26,7 @@ const Recommend: FC<IProps> = () => {
   useEffect(() => {
     dispatch(fetchBannerDataAction())
     dispatch(fetchHotRecommendAction())
+    dispatch(fetchNewAlbumAction())
   }, [])
   return (
     <RecommendWrapper>
@@ -31,6 +34,7 @@ const Recommend: FC<IProps> = () => {
       <RecommendSection className="wrap-v2">
         <RecommendLeft>
           <HotRecommend />
+          <NewAlbum />
         </RecommendLeft>
         <RecommendRight>right</RecommendRight>
       </RecommendSection>

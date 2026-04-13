@@ -10,3 +10,7 @@ export const getHotRecommend = (limit = 30) => {
     }
   })
 }
+// 新碟上架
+export const getNewAlbum = () => {
+  return api.get('/album/newest')
+}
