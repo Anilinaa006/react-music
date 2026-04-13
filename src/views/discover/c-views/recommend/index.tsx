@@ -15,6 +15,7 @@ import {
 } from './style'
 import HotRecommend from './c-cpns/hot-recommend'
 import NewAlbum from './c-cpns/new-album'
+import TopRanking from './c-cpns/top-ranking'
 
 // 对类型进行约束
 export interface IProps {
@@ -35,6 +36,7 @@ const Recommend: FC<IProps> = () => {
         <RecommendLeft>
           <HotRecommend />
           <NewAlbum />
+          <TopRanking />
         </RecommendLeft>
         <RecommendRight>right</RecommendRight>
       </RecommendSection>
