@@ -14,3 +14,13 @@ export const getHotRecommend = (limit = 30) => {
 export const getNewAlbum = () => {
   return api.get('/album/newest')
 }
+// 榜单
+// 飙升榜：19723756 新歌榜：3779629  原创榜：2884035
+
+export const getPlayListDetail = (id: number) => {
+  return api.get('/playlist/detail', {
+    params: {
+      id
+    }
+  })
+}

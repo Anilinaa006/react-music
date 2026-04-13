@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getBanners, getHotRecommend, getNewAlbum } from '../service/recommend'
+import {
+  getBanners,
+  getHotRecommend,
+  getNewAlbum,
+  getPlayListDetail
+} from '../service/recommend'
 
 // 异步action获取banner数据
 export const fetchBannerDataAction = createAsyncThunk(
@@ -23,20 +28,54 @@ export const fetchNewAlbumAction = createAsyncThunk(
   'newAlbum',
   async (_, { dispatch }) => {
     const res = await getNewAlbum()
-    console.log(res)
     dispatch(changeNewAlbumAction((res as any).albums))
+  }
+)
+const rankingIds = [19723756, 3779629, 2884035] // 飙升榜 新歌榜 原创榜
+// 异步action获取榜单详情数据
+export const fetchPlayListDetailAction = createAsyncThunk(
+  'playListDetail',
+  async (_, { dispatch }) => {
+    const promises: Promise<any>[] = []
+    for (const item of rankingIds) {
+      promises.push(getPlayListDetail(item))
+      // switch (item) {
+      //   case 19723756:
+      //     dispatch(changeUpRankingAction((res as any).playlist))
+      //     break
+      //   case 3779629:
+      //     dispatch(changeNewRankingAction((res as any).playlist))
+      //     break
+      //   case 2884035:
+      //     dispatch(changeOriginalRankingAction((res as any).playlist))
+      //     break
+      //   default:
+      // }
+    }
+    Promise.all(promises).then((res) => {
+      const playLists= res.map((item) => item.playlist)
+      dispatch(changeRankingsAction(playLists))
+    })
   }
 )
 interface IRecommendState {
   banners: any[]
   hotRecommend: any[]
   newAlbum: any[]
+  rankings: any[]
+  // upRanking: any
+  // newRanking: any
+  // originalRanking: any
 }
 
 const initialState: IRecommendState = {
   banners: [],
   hotRecommend: [],
-  newAlbum: []
+  newAlbum: [],
+  rankings: []
+  // upRanking: {},
+  // newRanking: {},
+  // originalRanking: {}
 }
 
 const recommendSlice = createSlice({
@@ -51,6 +90,9 @@ const recommendSlice = createSlice({
     },
     changeNewAlbumAction(state, { payload }) {
       state.newAlbum = payload
+    },
+    changeRankingsAction(state, { payload }) {
+      state.rankings = payload
     }
   }
 })
@@ -59,5 +101,6 @@ export default recommendSlice.reducer
 export const {
   changeBannersAction,
   changeHotRecommendAction,
-  changeNewAlbumAction
+  changeNewAlbumAction,
+  changeRankingsAction
 } = recommendSlice.actions

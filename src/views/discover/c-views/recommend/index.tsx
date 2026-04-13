@@ -4,7 +4,8 @@ import { useAppDispatch } from '@/store'
 import {
   fetchBannerDataAction,
   fetchHotRecommendAction,
-  fetchNewAlbumAction
+  fetchNewAlbumAction,
+  fetchPlayListDetailAction
 } from './store/recommend'
 import TopBanner from './c-cpns/top-bannner'
 import {
@@ -28,6 +29,7 @@ const Recommend: FC<IProps> = () => {
     dispatch(fetchBannerDataAction())
     dispatch(fetchHotRecommendAction())
     dispatch(fetchNewAlbumAction())
+    dispatch(fetchPlayListDetailAction())
   }, [])
   return (
     <RecommendWrapper>
